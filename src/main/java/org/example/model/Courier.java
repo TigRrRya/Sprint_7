@@ -1,10 +1,10 @@
-package org.example;
+package org.example.model;
 
 public class Courier {
     private String login;
     private String password;
     private String firstName;
-    private String id;
+    private Integer id;
 
 
     public Courier(String login, String password, String firstName) {
@@ -42,11 +42,11 @@ public class Courier {
         this.firstName = firstName;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

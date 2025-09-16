@@ -1,4 +1,4 @@
-package org.example.Cnstants;
+package org.example.constants;
 
 public class ConstantsApiAndUrl {
     public static final String BASE_URL = "https://qa-scooter.praktikum-services.ru";
@@ -9,6 +9,6 @@ public class ConstantsApiAndUrl {
     public static final String ORDERS_GET_ID_API = "/api/v1/orders/track";
     public static final String ORDERS_ACCEPT_API = "/api/v1/orders/accept/%d";
     public static final String ORDERS_CANSEL_API = "/api/v1/orders/cancel";
-    public static final String BASE_PASSWORD = "qwer";
+    public static final String BASE_PASSWORD = "qwert";
     public static final String BASE_NAME = "Sam";
 }

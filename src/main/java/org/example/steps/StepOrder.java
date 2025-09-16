@@ -1,13 +1,16 @@
+package org.example.steps;
+
 import io.qameta.allure.Step;
+import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
-import org.example.Order;
+import org.example.model.Order;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
-import static org.example.ConstantsApiAndUrl.*;
+import static org.example.constants.ConstantsApiAndUrl.*;
 
 
 public class StepOrder {
@@ -26,7 +29,7 @@ public class StepOrder {
 
     @Step("Создание заказа с заданными данными: {order} ")
     public ValidatableResponse createOrder(Order order) {
-        return given()
+        return RestAssured.given()
                 .header("Content-type", "application/json")
                 .body(order)
                 .when()
@@ -42,7 +45,7 @@ public class StepOrder {
 
     @Step("Получение объекта заказа после его создания по track: {track}")
     public ValidatableResponse getOrderByTrack(Integer track) {
-        var request = given().header("Content-Type", "application/json");
+        var request = RestAssured.given().header("Content-Type", "application/json");
 
         if (track != null) {
             request.queryParam("t", track);
@@ -56,7 +59,7 @@ public class StepOrder {
 
     @Step("Получение id заказа по треку: {track}")
     public int getOrderIdByTrack(int track) {
-        return given()
+        return RestAssured.given()
                 .header("Content-Type", "application/json")
                 .queryParam("t", track)
                 .when()
@@ -70,7 +73,7 @@ public class StepOrder {
 
     @Step("Отмена заказа по номеру трека: {track}")
     public void cancelOrder(int track) {
-        given()
+        RestAssured.given()
                 .header("Content-type", "application/json")
                 .queryParam("track", track)
                 .when()
@@ -80,7 +83,7 @@ public class StepOrder {
 
     @Step("Принятие заказа. Order ID: {orderId}, Courier ID: {courierId}")
     public ValidatableResponse acceptOrder(Integer orderId, Integer courierId) {
-        return given()
+        return RestAssured.given()
                 .header("Content-Type", "application/json")
                 .queryParam("courierId", courierId)
                 .when()
@@ -90,7 +93,7 @@ public class StepOrder {
 
     @Step("Получение списка всех заказов")
     public ValidatableResponse getOrdersList() {
-        return given()
+        return RestAssured.given()
                 .header("Content-type", "application/json")
                 .when()
                 .get(ORDERS_CREATE_AND_GET_TRACK_API)

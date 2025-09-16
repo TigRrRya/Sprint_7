@@ -13,7 +13,7 @@ import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.Matchers.containsString;
 
-public class TestCourierLoginApi {
+public class TestCourierLoginAndDeleteApi {
 
     private Courier courier;
     private StepCourier steps;
@@ -112,7 +112,7 @@ public class TestCourierLoginApi {
         steps.deleteCourier(courierId)
                 .statusCode(SC_OK)
                 .body("ok", is(true));
-        courierId = -1; // чтобы @After не удалял второй раз
+        courierId = -1; // чтобы @After не удалял второй раз реального курьера
     }
 
     @Test
