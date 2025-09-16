@@ -5,9 +5,30 @@ import org.example.ConstantsApiAndUrl;
 import org.example.Courier;
 import org.example.CourierLogin;
 
+import java.util.UUID;
+
 import static io.restassured.RestAssured.given;
+import static org.example.ConstantsApiAndUrl.BASE_NAME;
+import static org.example.ConstantsApiAndUrl.BASE_PASSWORD;
 
 public class StepCourier {
+
+    @Step("Генерация уникального курьера")
+    public Courier generateUniqueCourier() {
+        String uniqueLogin = "user-" + UUID.randomUUID().toString().substring(0, 8);
+        return new Courier(uniqueLogin, BASE_PASSWORD, BASE_NAME);
+    }
+
+    @Step("Генерация случайного логина")
+    public String generateRandomLogin() {
+        return "fake-" + UUID.randomUUID().toString().substring(0, 8);
+    }
+
+    @Step("Генерация случайного пароля")
+    public String generateRandomPassword() {
+        return "pass-" + UUID.randomUUID().toString().substring(0, 8);
+    }
+
 
     // Создание курьера
     @Step("POST " + ConstantsApiAndUrl.COURIER_API + " - создать курьера")
@@ -50,7 +71,7 @@ public class StepCourier {
 
     //Удаление курьера
     @Step("DELETE " + ConstantsApiAndUrl.COURIER_DELETE_API + " - удаление курьера")
-    public static ValidatableResponse deleteCourier(int id) {
+    public ValidatableResponse deleteCourier(int id) {
         return given()
                 .when()
                 .delete(String.format(ConstantsApiAndUrl.COURIER_DELETE_API, id))
